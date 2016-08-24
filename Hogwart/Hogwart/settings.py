@@ -25,10 +25,20 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
-# Application definition
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                            'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                            'django.contrib.messages.context_processors.messages',
+            ],
+    },
+    },]
 INSTALLED_APPS = (
     'polls.apps.PollsConfig',
     'django.contrib.admin',
@@ -63,6 +73,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+# 'default': {
+#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#     'NAME': 'mydatabase',
+#     'USER': 'mydatabaseuser',
+#     'PASSWORD': 'mypassword',
+#     'HOST': '127.0.0.1',
+#     'PORT': '5432',
+#     }
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
