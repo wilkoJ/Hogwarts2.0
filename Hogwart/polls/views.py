@@ -17,9 +17,9 @@ class StudentView(generic.DetailView):
         return Student.objects.all()
 
 def student_view(request):
-    student = get_object_or_404(Student, pk=request.POST['id'])
+    student = get_object_or_404(Student, pk=request.POST.get('id', False))
     try:
-        name = request.POST['name']
+        name = request.POST.get('name',False);
     except (KeyError, Choice.DoesNotExist):
 # Redisplay the question voting form.
         return render(request, 'polls/index.html', {
@@ -28,7 +28,8 @@ def student_view(request):
         })
     else:
         if (name == student.student_name):
-            return HttpResponseRedirect(reverse('polls:student', args=(student.student_id)))
+            print("Name = %s  id = %d", name, student.student_id)
+            return HttpResponseRedirect(reverse('polls:student', args=(student.student_id,)))
         return render(request, 'polls/index.html', {
             'error_message': "Name doesn't match the id.",
         })
