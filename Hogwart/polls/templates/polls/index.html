@@ -1,2 +1,10 @@
 {% load staticfiles %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<form action="{% url 'polls:student_view' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="id" />
+  <input type="text" name="name"/>
+  <input type="submit" value="Sign in" />
+</form>

@@ -17,6 +17,7 @@ class StudentAdmin(admin.ModelAdmin):
         (None,{'fields': ['student_name']}),
         ('Student points',{'fields':['points']}),
     ]
+
 class CourseAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields': ['course_name']}),

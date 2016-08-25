@@ -3,14 +3,20 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Student(models.Model):
+    pass
     student_id = models.AutoField(primary_key=True)
     student_name = models.CharField(max_length=30)
     points = models.IntegerField(default=0)
     def __str__(self):
         return self.student_name
-    def join_course(self, course):
-        course.append(self)
+        
+class Course(models.Model):
+    course_name = models.CharField(max_length=30)
+    course_students = models.ManyToManyField(Student);
+    def __str__(self):
+        return self.course_name
 
+Student.courses = models.ManyToManyField(Course)
 class House(models.Model):
     house_name = models.CharField(max_length=30)
     house_students = models.ManyToManyField(Student)
@@ -22,12 +28,6 @@ class House(models.Model):
         for student in house_students:
             self.house_points += student.points
 
-class Course(models.Model):
-    course_name = models.CharField(max_length=30)
-    course_students = models.ManyToManyField(Student);
-    def __str__(self):
-        return self.course_name
-
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=30)
     course_teached = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -37,3 +37,4 @@ class Teacher(models.Model):
         student.points += points
     def retrieve_points(student, points):
         student.points -= points
+
