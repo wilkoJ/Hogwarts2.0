@@ -8,3 +8,9 @@ Création de la page admin (plus simple pour l'ajout en base de données)
 Jeudi 25 Aout:
 
 Manipulé les vues et essayer de mettre en place le système de login
+
+Vendredi 25 Aout:
+
+Changement du data model
+Check du loggin (Id student, Pseudo)
+Possibilité de voir les autres étudiant et leur maison.

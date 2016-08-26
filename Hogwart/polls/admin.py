@@ -15,6 +15,7 @@ class HouseAdmin(admin.ModelAdmin):
 class StudentAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,{'fields': ['student_name']}),
+        ('Others',{'fields':['other_students']}),
         ('Student points',{'fields':['points']}),
     ]
 

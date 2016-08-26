@@ -4,9 +4,9 @@
 
 <form >
   {% csrf_token %}
-  <label> Class you go to:</label><br />
-  {% for course in student.course_set.all %}
-  <label for="course{{ forloop.counter }}">{{ course.course_name }}</label><br />
+  
+  {% for s in student.other_students.all %}
+  <a href="{% url 'polls:student' s.student_id %}">{{s.student_name}}</a>
+  <label>from {{s.house_set.get}}<label> <br />
   {% endfor %}
-  <label for="course{{ forloop.counter }}">point  {{student.points }}</label><br />
 </form>

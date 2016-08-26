@@ -1,0 +1,13 @@
+<h1>{{ student.student_name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form >
+  {% csrf_token %}
+  <label> Class you go to:</label><br />
+  {% for course in student.course_set.all %}
+  <label for="course{{ forloop.counter }}">{{ course.course_name }}</label><br />
+  {% endfor %}
+  <label for="course{{ forloop.counter }}">point  {{student.points }}</label><br />
+  <a href="{% url 'polls:student' student.student_id %}">all student</a>
+</form>
