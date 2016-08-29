@@ -1,0 +1,11 @@
+<h1>{{ teacher.teacher_name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form >
+  {% csrf_token %}
+  <label> Class you teach:</label><br />
+  <a href="{% url 'polls:course' teacher.teacher_id %}">{{ teacher.course_teached.course_name }}<a/><br />
+  <a href="{% url 'polls:student' teacher.teacher_id %}">all student</a>
+  <a href="{% url 'polls:houses' %}">all houses</a>
+</form>

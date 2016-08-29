@@ -31,6 +31,14 @@ class House(models.Model):
 
 Student.house = models.ForeignKey(House, on_delete=models.CASCADE)
 class Teacher(models.Model):
+    grading_value = {}
+    grading_value["O"]=30
+    grading_value["E"]=20
+    grading_value["A"]=10
+    grading_value["P"]=-10
+    grading_value["D"]=-20
+    grading_value["T"]=-30
+    teacher_id = models.AutoField(primary_key=True)
     teacher_name = models.CharField(max_length=30)
     course_teached = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):

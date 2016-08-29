@@ -27,11 +27,17 @@ class HouseView(generic.ListView):
     def get_queryset(self):
         return House.objects.all()
 
-class OtherView(generic.DetailView):
-    model = Student
-    template_name = 'polls/other.html'
+class CourseView(generic.DetailView):
+    model = Teacher
+    template_name = 'polls/course.html'
     def get_queryset(self):
-        return Student.objects.all()
+        return Teacher.objects.all()
+
+class TeacherIndexView(generic.DetailView):
+    model = Teacher
+    template_name = 'polls/teacher_index.html'
+    def get_queryset(self):
+        return Teacher.objects.all()
 
 def RepresentsInt(s):
     try:
@@ -44,8 +50,6 @@ def student_view(request):
     _id = RepresentsInt(request.POST.get('id', False))
     if (_id):
         student = get_object_or_404(Student, pk=request.POST.get('id', False))
-        houses = House.objects.all()
-        print(houses)
     else:
         return render(request, 'polls/index.html', {
             'error_message': "Id must be an int.",
@@ -53,7 +57,6 @@ def student_view(request):
     try:
         name = request.POST.get('name',False);
     except (KeyError, Choice.DoesNotExist):
-# Redisplay the question voting form.
         return render(request, 'polls/index.html', {
             'student': student,
             'error_message': "Name isn't define.",
@@ -65,3 +68,38 @@ def student_view(request):
         return render(request, 'polls/index.html', {
             'error_message': "Name doesn't match the id.",
         })
+
+def teacher_view(request):
+    _id = RepresentsInt(request.POST.get('id', False))
+    if (_id):
+        teacher = get_object_or_404(Teacher, pk=request.POST.get('id', False))
+    else:
+        return render(request, 'polls/index.html', {
+            'error_message': "Id must be an int.",
+        })
+    try:
+        name = request.POST.get('name',False);
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, 'polls/index.html', {
+            'teacher': teacher,
+            'error_message': "Name isn't define.",
+        })
+    else:
+        if (name == teacher.teacher_name):
+            print("Name = %s  id = %d", name, teacher.teacher_id)
+            return HttpResponseRedirect(reverse('polls:teacher_index', args=(teacher.teacher_id,)))
+        return render(request, 'polls/index.html', {
+            'error_message': "Name doesn't match the id.",
+        })
+
+def grade_student(request, teacher_id):
+    teacher = Teacher.objects.get(pk= teacher_id)
+    course = teacher.course_teached
+    i = 0
+    for s in course.course_students.all():
+        if (request.POST.get(str(s.student_id), False) != False):
+            s.points += Teacher.grading_value[request.POST.get("grade"+str(s.student_id), False)]
+            s.save()
+    return render(request, 'polls/index.html', {
+        'error_message': "Name doesn't match the id.",
+    })

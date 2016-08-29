@@ -8,7 +8,7 @@
   {% for course in student.course_set.all %}
   <label for="course{{ forloop.counter }}">{{ course.course_name }}</label><br />
   {% endfor %}
-  <label>point  {{student.points }}</label><br />
-  <a href="{% url 'polls:student' student.student_id %}">all student</a><br />
+  <label for="course{{ forloop.counter }}">point  {{student.points }}</label><br />
+  <a href="{% url 'polls:student' student.student_id %}">all student</a>
   <a href="{% url 'polls:houses' %}">all houses</a>
 </form>

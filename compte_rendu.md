@@ -18,3 +18,5 @@ Possibilité de voir les autres étudiant et leur maison.
 Lundi 29 Aout:
 Lister etudiants par maison : Ok
 Lister etudiants avec leur maison : Ok
+Grade student : Ok
+add point/retrieve point to students : Ok (done while grading at the moment)
