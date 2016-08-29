@@ -28,6 +28,7 @@ class House(models.Model):
         self.house_points = 0
         for student in house_students:
             self.house_points += student.points
+
 Student.house = models.ForeignKey(House, on_delete=models.CASCADE)
 class Teacher(models.Model):
     teacher_name = models.CharField(max_length=30)

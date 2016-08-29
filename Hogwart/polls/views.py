@@ -12,7 +12,6 @@ class IndexView(generic.ListView):
 class StudentIndexView(generic.DetailView):
     model = Student
     template_name = 'polls/student_index.html'
-    
     def get_queryset(self):
         return Student.objects.all()
 
@@ -21,6 +20,12 @@ class StudentView(generic.DetailView):
     template_name = 'polls/student.html'
     def get_queryset(self):
         return Student.objects.all()
+
+class HouseView(generic.ListView):
+    model = House
+    template_name = 'polls/house.html'
+    def get_queryset(self):
+        return House.objects.all()
 
 class OtherView(generic.DetailView):
     model = Student
@@ -39,6 +44,8 @@ def student_view(request):
     _id = RepresentsInt(request.POST.get('id', False))
     if (_id):
         student = get_object_or_404(Student, pk=request.POST.get('id', False))
+        houses = House.objects.all()
+        print(houses)
     else:
         return render(request, 'polls/index.html', {
             'error_message': "Id must be an int.",

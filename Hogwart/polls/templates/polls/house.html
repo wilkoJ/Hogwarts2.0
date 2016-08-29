@@ -1,0 +1,12 @@
+<h1>Houses</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for h in house_list %}
+<label>from {{h.house_name}} :<label> <br />
+    {% for s in h.house_students.all %}
+    <label>{{s.student_name}}</label>
+    {% endfor %}
+    <br/>
+{% endfor %}
+    

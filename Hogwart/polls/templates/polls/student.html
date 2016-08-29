@@ -1,4 +1,4 @@
-<h1>{{ student.student_name }}</h1>
+<h1>connected as {{ student.student_name }} from {{ student.house_set.get }}</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -6,7 +6,7 @@
   {% csrf_token %}
   
   {% for s in student.other_students.all %}
-  <a href="{% url 'polls:student' s.student_id %}">{{s.student_name}}</a>
+  <label>{{s.student_name}}</label>
   <label>from {{s.house_set.get}}<label> <br />
   {% endfor %}
 </form>
